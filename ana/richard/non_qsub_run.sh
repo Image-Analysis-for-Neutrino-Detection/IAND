@@ -8,5 +8,5 @@ for ((i=START;i<=END;i++))
 do
     export RUN_NUMBER=$i
     echo 'Run: '$RUN_NUMBER
-    source run_make_image.sh 
+    source run_make_image_df.sh 
 done

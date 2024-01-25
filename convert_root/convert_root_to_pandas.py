@@ -6,8 +6,8 @@ import uproot
 import math
 from math import atan2,degrees,sqrt,acos,pi
 
-# input_dir = '/fs/ess/PAS2159/neutrino/signal_fixed/'
-# output_dir = '/fs/ess/PAS2159/neutrino/signal_fixed/dataframe_converted'
+# input_dir = '/fs/ess/PAS2159/neutrino/signal_fixed/root/'
+# output_dir = '/fs/ess/PAS2159/neutrino/signal_fixed/dataframe_converted/'
 # run_number = 1
 
 # %%
@@ -94,6 +94,10 @@ print("events Tree")
 for key in events.keys():
     print("   ",key)
 
+run_array = events['run'].array(library="np")
+weight_array = events['weight'].array(library="np")
+#print(run,weight)
+event_times_array = events['event/fTimes[108][260]'].array(library="np")
 event_times_array = events['event/fTimes[108][260]'].array(library="np")
 event_volts_array = events['event/fVolts[108][260]'].array(library="np")
 event_chan_ids_array = events['event/RawAnitaEvent/chanId[108]'].array(library="np")
@@ -114,7 +118,11 @@ for event in range(num_events):
     event_times = event_times_array[event]
     event_volts = event_volts_array[event]
     event_chan_ids = event_chan_ids_array[event]
+    run_internal = run_array[event]
+    weight = weight_array[event]
     drows.append({'run':run_number, 'event':event,
+                    'run_internal':run_internal,
+                    'weight':weight,
                     'neu_energy':neu_energy,'interaction_phi':interaction_phi,'interaction_eta':interaction_eta,
                     'event_chan_ids':event_chan_ids,
                     'event_times':event_times,'event_volts':event_volts})
