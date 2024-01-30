@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -A PAS2159
-#PBS -l walltime=0:10:00
+#PBS -l walltime=0:30:00
 #PBS -l nodes=1:ppn=2
 #PBS -j oe
 #

@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -A PAS2159
-#PBS -l walltime=0:10:00
+#PBS -l walltime=2:00:00
 #PBS -l nodes=1:ppn=10:gpus=1
 #PBS -j oe
 # uncomment if using qsub
@@ -14,7 +14,8 @@ echo "got here pwd"
 pwd
 module load cuda/11.8.0
 echo "start python"
-python -u train_vit_regression.py \
-            --train_dir '/fs/scratch/PAS2159/neutrino/signal_fixed/dataframe_converted/volts_images/images/' \
+python -u train_vit_regression_memory.py \
+            --INPUT_DIR '/fs/scratch/PAS2159/neutrino/signal_fixed/dataframe_converted/volts_images/' \
             --label_type 'PHI' \
-            >& logs/test_vit_neutrino_PHI.log
+            --output_model_path '/fs/ess/PAS2159/neutrino/torch_models/simple_phi_regression.pt' \
+            >& logs/test_vit_neutrino_PHI_memory.log

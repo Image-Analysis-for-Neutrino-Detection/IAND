@@ -17,4 +17,5 @@ echo "start python"
 python -u train_vit_regression.py \
             --train_dir '/fs/scratch/PAS2159/neutrino/signal_fixed/dataframe_converted/volts_images/images/' \
             --label_type 'THETA' \
+            --output_model_path '/fs/ess/PAS2159/neutrino/torch_models/simple_thetalsa_regression.state_dict' \
             >& logs/test_vit_neutrino_THETA.log

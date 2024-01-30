@@ -1,9 +1,9 @@
 #!/bin/bash
 
 START=1
-END=1
-export INPUT_DIR='/fs/ess/PAS2159/neutrino/signal_fixed/dataframe_converted/'
-export OUTPUT_DIR='/fs/ess/PAS2159/neutrino/signal_fixed/dataframe_converted/volts_images/'
+END=2
+export INPUT_DIR='/fs/scratch/PAS2159/neutrino/signal_fixed/dataframe_converted/'
+export OUTPUT_DIR='/fs/scratch/PAS2159/neutrino/signal_fixed/dataframe_converted/volts_images/'
 for ((i=START;i<=END;i++))
 do
     export RUN_NUMBER=$i
