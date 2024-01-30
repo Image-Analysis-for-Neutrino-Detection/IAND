@@ -76,9 +76,6 @@ seed_everything(seed)
 # %%
 device = 'cuda'
 
-train_path = args.train_path
-test_path = args.test_path
-
 #
 # Utility function to go from normalized value back to degrees
 def convert_to_degrees(val):
