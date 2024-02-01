@@ -47,10 +47,41 @@ arg_parser.add_argument('--label_type',
 arg_parser.add_argument('--output_model_path',
                             type=str,
                             default='')
+arg_parser.add_argument('--vit_dim',
+                            type=int,
+                            default=256)
+arg_parser.add_argument('--vit_depth',
+                            type=int,
+                            default=12)
+arg_parser.add_argument('--vit_heads',
+                            type=int,
+                            default=16)
+arg_parser.add_argument('--vit_mlp_dim',
+                            type=int,
+                            default=256)
+arg_parser.add_argument('--vit_dropout',
+                            type=float,
+                            default=0.1)
+arg_parser.add_argument('--vit_emb_dropout',
+                            type=float,
+                            default=0.1)
       
 args = arg_parser.parse_args()
 print(args)
 
+dim = args.vit_dim
+depth = args.vit_depth
+heads = args.vit_heads
+mlp_dim = args.vit_mlp_dim
+dropout = args.vit_dropout
+emb_dropout = args.vit_emb_dropout
+print("VIT parameters:")
+print("   dim         ",dim)
+print("   depth       ",depth)
+print("   heads       ",heads)
+print("   mlp_dim     ",mlp_dim)
+print("   dropout     ",dropout)
+print("   emb_dropout ",emb_dropout)
 
 
 # %%
@@ -191,12 +222,12 @@ model = ViT(
     channels=1,
     patch_size = 16,
     num_classes = 1,
-    dim = 256,
-    depth = 12,
-    heads = 16,
-    mlp_dim = 256,
-    dropout = 0.1,
-    emb_dropout = 0.1
+    dim = dim,
+    depth = depth,
+    heads = heads,
+    mlp_dim = mlp_dim,
+    dropout = dropout,
+    emb_dropout = emb_dropout
 ).to(device)
 
 print("model",model)
@@ -384,7 +415,7 @@ for epoch in range(epochs):
     )
     print("   num_all,num_good:",num_all,num_good,"; num_all_val,num_good_val",num_all_val,num_good_val)
     printmem()
-    if epoch_val_loss < epoch_val_loss_min:
+    if epoch_val_loss < epoch_val_loss_min and len(args.output_model_path)>0:
         epoch_val_loss_min = epoch_val_loss
         print("Validation loss decreased, writing out model!")
         t0 = time.time()
